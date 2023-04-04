@@ -1,3 +1,7 @@
 # Basic Example
 
-Example Terraform configuration which shows the basic usage of this module.
+Example Terraform configuration which deploys the following resources.
+ - Resource group
+ - Synapse workspace
+ - Two storage accounts
+ - Log Analytics workspace
