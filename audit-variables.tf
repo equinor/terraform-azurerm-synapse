@@ -1,13 +1,6 @@
 variable "audit_storage_account_id" {
   description = "Resource Id for a storage account to store audit logs in."
   type        = string
-  default     = null
-}
-
-variable "audit_storage_account_name" {
-  description = "Name of the audit storage account. Will not be used if audit storage account id is given."
-  type        = string
-  default     = null
 }
 
 variable "audit_log_monitoring_enabled" {

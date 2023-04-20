@@ -1,30 +1,16 @@
 #
 # Audit and logs
 #
-module "audit_storage" {
-  source = "./modules/storage"
-
-  count = var.audit_storage_account_id == null ? 1 : 0
-
-  resource_group_name          = azurerm_synapse_workspace.this.resource_group_name
-  location                     = azurerm_synapse_workspace.this.location
-  account_name                 = var.audit_storage_account_name
-  log_analytics_workspace_id   = var.log_analytics_id
-  shared_access_key_enabled    = true
-  network_rules_default_action = "Allow"
-}
-
 data "azurerm_storage_account" "audit_storage" {
-  count               = var.audit_storage_account_id == null ? 0 : 1
   resource_group_name = replace(var.audit_storage_account_id, "resourceGroups/(.*?)/", "$1")
   name                = replace(var.audit_storage_account_id, "storageAccounts/(.*?)(?:$|/$)", "$1")
 }
 
 resource "azurerm_synapse_workspace_extended_auditing_policy" "this" {
   synapse_workspace_id       = azurerm_synapse_workspace.this.id
-  storage_endpoint           = var.audit_storage_account_id != null ? data.azurerm_storage_account.audit_storage[0].primary_blob_endpoint : module.audit_storage[0].blob_endpoint
+  storage_endpoint           = data.azurerm_storage_account.audit_storage.primary_blob_endpoint
   retention_in_days          = var.audit_retention_in_days
-  storage_account_access_key = var.audit_storage_account_id != null ? data.azurerm_storage_account.audit_storage[0].primary_access_key : module.audit_storage[0].primary_access_key
+  storage_account_access_key = data.azurerm_storage_account.audit_storage.primary_access_key
   log_monitoring_enabled     = var.audit_log_monitoring_enabled
 }
 
@@ -37,16 +23,16 @@ resource "azurerm_synapse_workspace_security_alert_policy" "this" {
   email_account_admins_enabled = var.alert_policy.email_account_admins_enabled
   email_addresses              = var.alert_policy.alert_email_addresses
   retention_days               = var.alert_policy.retention_days
-  storage_account_access_key   = var.audit_storage_account_id ? data.azurerm_storage_account.audit_storage[0].primary_access_key : module.audit_storage[0].primary_access_key
-  storage_endpoint             = var.audit_storage_account_id ? data.azurerm_storage_account.audit_storage[0].primary_blob_endpoint : module.audit_storage[0].blob_endpoint
+  storage_account_access_key   = data.azurerm_storage_account.audit_storage.primary_access_key
+  storage_endpoint             = data.azurerm_storage_account.audit_storage.primary_blob_endpoint
 }
 
 resource "azurerm_synapse_workspace_vulnerability_assessment" "this" {
   count = var.alert_policy == null ? 0 : 1
 
   workspace_security_alert_policy_id = azurerm_synapse_workspace_security_alert_policy.this[0].id
-  storage_container_path             = "${(var.audit_storage_account_id != null ? data.azurerm_storage_account.audit_storage[0].primary_blob_endpoint : module.audit_storage[0].blob_endpoint)}${azurerm_synapse_workspace.this.name}-VaScans"
-  storage_account_access_key         = var.audit_storage_account_id ? data.azurerm_storage_account.audit_storage[0].primary_access_key : module.audit_storage[0].primary_access_key
+  storage_container_path             = "${(data.azurerm_storage_account.audit_storage.primary_blob_endpoint)}${azurerm_synapse_workspace.this.name}-VaScans"
+  storage_account_access_key         = data.azurerm_storage_account.audit_storage.primary_access_key
   recurring_scans {
     enabled                           = var.recurring_vulnerability_scans_enabled
     email_subscription_admins_enabled = var.vulnerability_scans_admin_email_notification_enabled

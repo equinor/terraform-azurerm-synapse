@@ -3,7 +3,7 @@ resource "azurerm_synapse_workspace" "this" {
   resource_group_name = var.resource_group_name
   location            = var.location
 
-  storage_data_lake_gen2_filesystem_id = var.data_lake_gen2_filesystem_id == null ? azurerm_storage_data_lake_gen2_filesystem.this[0].id : var.data_lake_gen2_filesystem_id
+  storage_data_lake_gen2_filesystem_id = azurerm_storage_data_lake_gen2_filesystem.this.id
   sql_identity_control_enabled         = var.sql_identity_control_enabled
   sql_administrator_login              = var.sql_administrator_login
   sql_administrator_login_password     = var.sql_administrator_login_password
@@ -76,30 +76,9 @@ resource "azurerm_synapse_workspace" "this" {
   tags = var.tags
 }
 
-module "workspace_storage" {
-  source = "./modules/storage"
-
-  count = var.data_lake_gen2_filesystem_id == null ? 1 : 0
-
-  resource_group_name       = var.resource_group_name
-  location                  = var.location
-  account_name              = var.datalake_account_name
-  shared_access_key_enabled = true
-  is_hns_enabled            = true
-  blob_properties = {
-    versioning_enabled  = false
-    restore_policy_days = 0
-    change_feed_enabled = false
-  }
-  network_rules_default_action = "Allow"
-  log_analytics_workspace_id   = var.log_analytics_id
-}
-
 resource "azurerm_storage_data_lake_gen2_filesystem" "this" {
-  count = var.data_lake_gen2_filesystem_id == null ? 1 : 0
-
   name               = var.workspace_name
-  storage_account_id = module.workspace_storage[0].account_id
+  storage_account_id = var.data_lake_gen2_id
 }
 
 resource "azurerm_synapse_firewall_rule" "this" {

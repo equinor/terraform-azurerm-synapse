@@ -35,15 +35,9 @@ variable "identity" {
   default = {}
 }
 
-variable "data_lake_gen2_filesystem_id" {
-  description = "The resource id of a Azure DataLake gen2 filesystem resource. If this is not provided datalake name must be provided"
+variable "data_lake_gen2_id" {
+  description = "The resource id of a Azure DataLake gen2 resource."
   type        = string
-  default     = null
-}
-variable "datalake_account_name" {
-  description = "The name of the data lake storage account. Will not be used if data_lake_gen2_id is provided"
-  type        = string
-  default     = null
 }
 
 variable "sql_identity_control_enabled" {
@@ -85,7 +79,7 @@ variable "aad_admins" {
     tenant_id = string
   }))
 
-  default = null
+  default = []
 }
 
 variable "customer_managed_key" {
