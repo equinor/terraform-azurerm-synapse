@@ -13,7 +13,7 @@ variable "location" {
   type        = string
 }
 
-variable "log_analytics_id" {
+variable "log_analytics_workspace_id" {
   description = "Id of the log analytics workspace to send logs to."
   type        = string
 }
