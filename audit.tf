@@ -43,7 +43,7 @@ resource "azurerm_synapse_workspace_vulnerability_assessment" "this" {
 resource "azurerm_monitor_diagnostic_setting" "this" {
   name                           = "ds-${azurerm_synapse_workspace.this.name}"
   target_resource_id             = azurerm_synapse_workspace.this.id
-  log_analytics_workspace_id     = var.log_analytics_id
+  log_analytics_workspace_id     = var.log_analytics_workspace_id
   log_analytics_destination_type = var.log_analytics_destination_type
   dynamic "enabled_log" {
     for_each = toset(var.diagnostic_setting_log_categories)

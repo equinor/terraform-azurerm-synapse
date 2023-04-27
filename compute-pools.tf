@@ -54,8 +54,8 @@ module "sql_pool" {
   geo_backup_policy_enabled = each.value.geo_backup_policy_enabled
   tags                      = each.value.tags
 
-  audit_storage_account_name           = var.audit_storage_account_id ? data.azurerm_storage_account.audit_storage[0].name : module.audit_storage[0].name
-  audit_storage_account_resource_group = var.audit_storage_account_id ? data.azurerm_storage_account.audit_storage[0].resource_group_name : module.audit_storage[0].resource_group_name
+  audit_storage_account_name           = data.azurerm_storage_account.audit_storage.name
+  audit_storage_account_resource_group = data.azurerm_storage_account.audit_storage.resource_group_name
   audit_retention_in_days              = each.value.audit_retention_in_days
   audit_log_monitoring_enabled         = each.value.audit_log_monitoring_enabled
   alert_policy_state                   = each.value.alert_policy_state
