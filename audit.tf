@@ -13,7 +13,7 @@ data "azurerm_storage_account" "audit_storage" {
 resource "azurerm_role_assignment" "audit_storage" {
   scope                = data.azurerm_storage_account.audit_storage.id
   role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = azurerm_synapse_workspace.this.identity.principal_id
+  principal_id         = azurerm_synapse_workspace.this.identity[0].principal_id
 }
 
 resource "azurerm_synapse_workspace_extended_auditing_policy" "this" {

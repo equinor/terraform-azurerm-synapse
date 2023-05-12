@@ -52,7 +52,7 @@ variable "diagnostic_setting_log_categories" {
     retention_policy : optional(object({
       enabled : optional(bool, true)
       days : optional(string, 0)
-    }), null)
+    }), {})
   }))
 
   default = [
@@ -74,7 +74,7 @@ variable "diagnostic_setting_metric_categories" {
     retention_policy : optional(object({
       enabled : optional(bool, true)
       days : optional(string, 0)
-    }), null)
+    }), {})
   }))
 
   default = [
