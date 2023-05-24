@@ -160,7 +160,7 @@ variable "public_network_access_enabled" {
   description = "Whether public network access is allowed for the workspace. Defaults to false"
   type        = bool
 
-  default = false
+  default = true
 }
 
 variable "purview_id" {
