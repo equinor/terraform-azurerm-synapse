@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.0.0](https://github.com/equinor/terraform-azurerm-synapse/compare/v0.1.0...v1.0.0) (2023-09-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove unused variable
+* Removed log analytics destination type
+
+### Bug Fixes
+
+* Issues with spark pools auto scale ([e369d78](https://github.com/equinor/terraform-azurerm-synapse/commit/e369d784ecb717476c184e71b67157392da498dc))
+* Remove unused variable ([d695f31](https://github.com/equinor/terraform-azurerm-synapse/commit/d695f31b6155147c4a4006a591d076b021aeef52))
+* Removed log analytics destination type ([0b5dac0](https://github.com/equinor/terraform-azurerm-synapse/commit/0b5dac09a7984a2d6619e8c774ca84dca31c32e9))
+
 ## 0.1.0 (2023-05-24)
 
 
