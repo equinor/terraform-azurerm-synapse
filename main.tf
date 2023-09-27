@@ -74,6 +74,10 @@ resource "azurerm_synapse_workspace" "this" {
   purview_id                           = var.purview_id
 
   tags = var.tags
+
+  lifecycle {
+    ignore_changes = [github_repo[0].last_commit_id, azure_devops_repo[0].last_commit_id]
+  }
 }
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "this" {
@@ -82,7 +86,7 @@ resource "azurerm_storage_data_lake_gen2_filesystem" "this" {
 }
 
 resource "azurerm_synapse_firewall_rule" "this" {
-  for_each = { for fr in var.firewall_rules : fr.name => fr }
+  for_each = { for fr in var.allowed_firewall_rules : fr.name => fr }
 
   synapse_workspace_id = azurerm_synapse_workspace.this.id
   name                 = each.value.name
@@ -116,12 +120,12 @@ resource "azurerm_synapse_linked_service" "this" {
   name                  = each.value.name
   synapse_workspace_id  = azurerm_synapse_workspace.this.id
   type                  = each.value.type
-  type_properties_json  = each.value.type_properties_json
+  type_properties_json  = jsonencode(each.value.type_properties)
   additional_properties = each.value.additional_properties
   annotations           = each.value.annotations
   description           = each.value.description
   dynamic "integration_runtime" {
-    for_each = coalesce(each.value.integration_runtime)
+    for_each = each.value.integration_runtime != null ? [each.value.integration_runtime] : []
     content {
       name       = integration_runtime.value.name
       parameters = integration_runtime.value.parameters
@@ -137,13 +141,4 @@ resource "azurerm_synapse_managed_private_endpoint" "this" {
   synapse_workspace_id = azurerm_synapse_workspace.this.id
   target_resource_id   = each.value.target_resource_id
   subresource_name     = each.value.subresource_name
-}
-
-resource "azurerm_synapse_private_link_hub" "this" {
-  count               = var.create_private_link_hub ? 1 : 0
-  name                = "plh-${azurerm_synapse_workspace.this.name}"
-  resource_group_name = azurerm_synapse_workspace.this.resource_group_name
-  location            = azurerm_synapse_workspace.this.location
-
-  tags = var.private_link_hub_tags
 }

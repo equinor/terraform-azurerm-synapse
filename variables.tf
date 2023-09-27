@@ -203,12 +203,6 @@ variable "managed_private_endpoints" {
   default = []
 }
 
-variable "create_private_link_hub" {
-  description = "Should there be created a synapse private link hub?"
-  type        = bool
-  default     = false
-}
-
 variable "private_link_hub_tags" {
   description = "Tags for the private link hub."
   type        = map(string)
