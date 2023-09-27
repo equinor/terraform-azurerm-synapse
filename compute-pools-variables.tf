@@ -4,13 +4,17 @@ variable "spark_pools" {
     name : string
     node_size_family : string
     node_size : string
-    node_count : number
+    node_count : optional(number, null)
     auto_pause_delay_in_minutes : optional(number, 5)
+    auto_scale : optional(object({
+      max_node_count : number
+      min_node_count : number
+    }), null)
     cache_size : optional(number, null)
-    compute_isolation_enabled : optional(bool, true)
+    compute_isolation_enabled : optional(bool, false)
     dynamic_executor_allocation_enabled : optional(bool, true)
-    min_executors : optional(number, 0)
-    max_executors : optional(number, 0)
+    min_executors : optional(number, 1)
+    max_executors : optional(number, 2)
     library_requirement : optional(object({
       content : string
       filename : string
