@@ -18,12 +18,6 @@ variable "log_analytics_workspace_id" {
   type        = string
 }
 
-variable "log_analytics_destination_type" {
-  description = "Type of destination in log analytics."
-  type        = string
-  default     = "Dedicated"
-}
-
 variable "identity" {
   description = "The identity or identities to configure for this Workspace."
 
