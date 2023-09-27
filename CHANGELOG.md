@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/equinor/terraform-azurerm-synapse/compare/v1.0.0...v2.0.0) (2023-09-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* Removed ability to create private link hub
+
+### Code Refactoring
+
+* Removed ability to create private link hub ([f98ded2](https://github.com/equinor/terraform-azurerm-synapse/commit/f98ded2a725f8812e4ea3ff584d67073e1fedaa0))
+
 ## [1.0.0](https://github.com/equinor/terraform-azurerm-synapse/compare/v0.1.0...v1.0.0) (2023-09-27)
 
 
