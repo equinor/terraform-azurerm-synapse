@@ -7,6 +7,7 @@ resource "azurerm_synapse_workspace" "this" {
   sql_identity_control_enabled         = var.sql_identity_control_enabled
   sql_administrator_login              = var.sql_administrator_login
   sql_administrator_login_password     = var.sql_administrator_login_password
+  azuread_authentication_only          = var.azuread_authentication_only
   dynamic "sql_aad_admin" {
     for_each = { for sql_aad_admin in var.sql_aad_admins : sql_aad_admin.login => sql_aad_admin }
 
