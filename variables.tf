@@ -40,6 +40,12 @@ variable "sql_identity_control_enabled" {
   default     = true
 }
 
+variable "azuread_authentication_only" {
+  description = "Is Azure Active Directory Authentication the only way to authenticate with resources inside this synapse Workspace?"
+  type        = bool
+  default     = true
+}
+
 variable "sql_aad_admins" {
   description = "The SQL AAD admins of this workspace"
   type = set(object({
