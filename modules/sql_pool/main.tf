@@ -65,7 +65,7 @@ resource "azurerm_synapse_sql_pool_vulnerability_assessment" "this" {
 }
 
 resource "azurerm_synapse_sql_pool_vulnerability_assessment_baseline" "this" {
-  for_each = var.vulnerability_assessment_baselines
+  for_each = { for vulnerability_assessment in var.vulnerability_assessment_baselines : vulnerability_assessment.name => vulnerability_assessment }
 
   name                                 = each.value.name
   rule_name                            = each.value.rule_id
@@ -83,7 +83,7 @@ resource "azurerm_synapse_sql_pool_vulnerability_assessment_baseline" "this" {
 # Workload groups
 #
 resource "azurerm_synapse_sql_pool_workload_group" "this" {
-  for_each = var.workload_groups
+  for_each = { for group in var.workload_groups : group.name => group }
 
   name                               = each.value.name
   sql_pool_id                        = azurerm_synapse_sql_pool.this.id
