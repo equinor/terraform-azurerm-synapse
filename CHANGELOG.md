@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/equinor/terraform-azurerm-synapse/compare/v2.0.0...v3.0.0) (2024-01-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* Add ad authentication only option ([#13](https://github.com/equinor/terraform-azurerm-synapse/issues/13))
+
+### Features
+
+* Add ad authentication only option ([#13](https://github.com/equinor/terraform-azurerm-synapse/issues/13)) ([5df0df3](https://github.com/equinor/terraform-azurerm-synapse/commit/5df0df3fa47c88c3cdaa0b373ced08953cbe0b62))
+
 ## [2.0.0](https://github.com/equinor/terraform-azurerm-synapse/compare/v1.0.0...v2.0.0) (2023-09-27)
 
 
