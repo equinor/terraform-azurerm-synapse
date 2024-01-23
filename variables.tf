@@ -43,7 +43,7 @@ variable "sql_identity_control_enabled" {
 variable "azuread_authentication_only" {
   description = "Is Azure Active Directory Authentication the only way to authenticate with resources inside this synapse Workspace?"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "sql_aad_admins" {
