@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/equinor/terraform-azurerm-synapse/compare/v3.0.0...v3.0.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* Add lifecycle ignore to node-count for sparkpools to avoid wrong updates ([#12](https://github.com/equinor/terraform-azurerm-synapse/issues/12)) ([b5ffe83](https://github.com/equinor/terraform-azurerm-synapse/commit/b5ffe836df9c1b3747d24ab5ae14e8e109d08bf8))
+
 ## [3.0.0](https://github.com/equinor/terraform-azurerm-synapse/compare/v2.0.0...v3.0.0) (2024-01-23)
 
 
