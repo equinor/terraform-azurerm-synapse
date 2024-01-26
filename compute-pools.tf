@@ -45,4 +45,8 @@ resource "azurerm_synapse_spark_pool" "this" {
   spark_version       = each.value.spark_version
 
   tags = each.value.tags
+
+  lifecycle { # Ignore changes to node count as this triggers an update every time
+    ignore_changes = [node_count]
+  }
 }
