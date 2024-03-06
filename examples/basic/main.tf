@@ -29,7 +29,7 @@ resource "azurerm_storage_account" "dls" {
   location                 = azurerm_resource_group.this.location
   is_hns_enabled           = true
   account_tier             = "Standard"
-  account_replication_type = "LRS"
+  account_replication_type = "GRS"
   min_tls_version          = "TLS1_2"
 }
 
@@ -38,7 +38,7 @@ resource "azurerm_storage_account" "staud" {
   resource_group_name      = azurerm_resource_group.this.name
   location                 = azurerm_resource_group.this.location
   account_tier             = "Standard"
-  account_replication_type = "LRS"
+  account_replication_type = "GRS"
   min_tls_version          = "TLS1_2"
 }
 
