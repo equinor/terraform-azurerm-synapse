@@ -178,7 +178,7 @@ variable "allowed_firewall_rules" {
     end_ip_address : string
   }))
 
-  default = null
+  default = []
 }
 
 variable "linked_services" {
