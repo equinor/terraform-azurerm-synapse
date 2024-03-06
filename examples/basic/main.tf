@@ -24,16 +24,22 @@ resource "azurerm_log_analytics_workspace" "this" {
 }
 
 resource "azurerm_storage_account" "dls" {
-  name                = "dls${random_id.this.hex}"
-  resource_group_name = azurerm_resource_group.this.name
-  location            = azurerm_resource_group.this.location
-  is_hns_enabled      = true
+  name                     = "dls${random_id.this.hex}"
+  resource_group_name      = azurerm_resource_group.this.name
+  location                 = azurerm_resource_group.this.location
+  is_hns_enabled           = true
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  min_tls_version          = "TLS1_2"
 }
 
 resource "azurerm_storage_account" "staud" {
-  name                = "staud${random_id.this.hex}"
-  resource_group_name = azurerm_resource_group.this.name
-  location            = azurerm_resource_group.this.location
+  name                     = "staud${random_id.this.hex}"
+  resource_group_name      = azurerm_resource_group.this.name
+  location                 = azurerm_resource_group.this.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  min_tls_version          = "TLS1_2"
 }
 
 module "synapse" {
@@ -44,7 +50,7 @@ module "synapse" {
   location                         = azurerm_resource_group.this.location
   data_lake_gen2_id                = azurerm_storage_account.dls.id
   audit_storage_account_id         = azurerm_storage_account.staud.id
-  log_analytics_id                 = azurerm_log_analytics_workspace.this.id
+  log_analytics_workspace_id       = azurerm_log_analytics_workspace.this.id
   sql_administrator_login          = "SynapseSQLAdmin"
   sql_administrator_login_password = random_password.this.result
 }
