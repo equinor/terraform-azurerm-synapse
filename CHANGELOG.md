@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/equinor/terraform-azurerm-synapse/compare/v3.0.1...v3.1.0) (2024-03-06)
+
+
+### Features
+
+* upgrade azurerm_storage_account properties ([#20](https://github.com/equinor/terraform-azurerm-synapse/issues/20)) ([ad6157d](https://github.com/equinor/terraform-azurerm-synapse/commit/ad6157dbe65c06b53b42df5530d69033d402e28a))
+
 ## [3.0.1](https://github.com/equinor/terraform-azurerm-synapse/compare/v3.0.0...v3.0.1) (2024-01-26)
 
 
