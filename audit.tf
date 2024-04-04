@@ -71,7 +71,6 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
     for_each = toset(var.diagnostic_setting_metric_categories)
     content {
       category = metric.value.category
-
     }
   }
 }
