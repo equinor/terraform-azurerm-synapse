@@ -65,28 +65,13 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
     for_each = toset(var.diagnostic_setting_log_categories)
     content {
       category = enabled_log.value.category
-      dynamic "retention_policy" {
-        for_each = [lookup(enabled_log.value, "retention_policy", null)]
-
-        content {
-          enabled = retention_policy.value.enabled
-          days    = lookup(retention_policy.value, "days", 0)
-        }
-      }
     }
   }
   dynamic "metric" {
     for_each = toset(var.diagnostic_setting_metric_categories)
     content {
       category = metric.value.category
-      dynamic "retention_policy" {
-        for_each = [lookup(metric.value, "retention_policy", null)]
 
-        content {
-          enabled = retention_policy.value.enabled
-          days    = lookup(retention_policy.value, "days", 0)
-        }
-      }
     }
   }
 }
