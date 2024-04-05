@@ -49,10 +49,6 @@ variable "diagnostic_setting_log_categories" {
   description = "A list of log categories to be set for this diagnostic setting."
   type = list(object({
     category : string
-    retention_policy : optional(object({
-      enabled : optional(bool, true)
-      days : optional(string, 0)
-    }), {})
   }))
 
   default = [
@@ -71,10 +67,6 @@ variable "diagnostic_setting_metric_categories" {
   description = "A list of metric categories to be set for this diagnostic setting."
   type = list(object({
     category : string
-    retention_policy : optional(object({
-      enabled : optional(bool, true)
-      days : optional(string, 0)
-    }), {})
   }))
 
   default = [
