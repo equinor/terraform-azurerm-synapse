@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.0.0](https://github.com/equinor/terraform-azurerm-synapse/compare/v3.0.1...v4.0.0) (2024-04-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **diagnostics:** removed diagnostic setting retention policy ([#23](https://github.com/equinor/terraform-azurerm-synapse/issues/23))
+
+### Features
+
+* **diagnostics:** removed diagnostic setting retention policy ([#23](https://github.com/equinor/terraform-azurerm-synapse/issues/23)) ([41e36e5](https://github.com/equinor/terraform-azurerm-synapse/commit/41e36e50a889fffca6e5f7695e6654e64fe57922))
+* upgrade azurerm_storage_account properties ([#20](https://github.com/equinor/terraform-azurerm-synapse/issues/20)) ([ad6157d](https://github.com/equinor/terraform-azurerm-synapse/commit/ad6157dbe65c06b53b42df5530d69033d402e28a))
+
 ## [3.0.1](https://github.com/equinor/terraform-azurerm-synapse/compare/v3.0.0...v3.0.1) (2024-01-26)
 
 
