@@ -117,7 +117,7 @@ resource "azurerm_synapse_spark_pool" "static_nodes" {
 resource "azurerm_monitor_diagnostic_setting" "this" {
   name = "ds-${var.name}"
   # Conditionally select target based on autoscale settings
-  target_resource_id         = var.auto_scale_max_node_count != null ? azurerm_synapse_spark_pool.auto_scale.id : azurerm_synapse_spark_pool.static_nodes.id
+  target_resource_id         = var.auto_scale_max_node_count != null ? azurerm_synapse_spark_pool.auto_scale[0].id : azurerm_synapse_spark_pool.static_nodes[0].id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
   dynamic "enabled_log" {
