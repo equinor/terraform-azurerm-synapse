@@ -123,7 +123,7 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
   dynamic "enabled_log" {
     for_each = toset(var.diagnostic_setting_log_categories)
     content {
-      category = enabled_log.value.category
+      category = enabled_log.value
     }
   }
 
