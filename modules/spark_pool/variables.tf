@@ -19,7 +19,7 @@ variable "node_size_family" {
   default     = "None"
   validation {
     condition     = contains(["HardwareAcceleratedFPGA", "HardwareAcceleratedGPU", "MemoryOptimized", "None"], var.node_size_family)
-    error_message = format("'node_size_family' type '%s' is not supported. Possible values are 'HardwareAcceleratedFPGA', 'HardwareAcceleratedGPU', 'MemoryOptimized' and 'None'")
+    error_message = format("'node_size_family' type '%s' is not supported. Possible values are 'HardwareAcceleratedFPGA', 'HardwareAcceleratedGPU', 'MemoryOptimized' and 'None'", var.node_size_family)
   }
 }
 
@@ -29,7 +29,7 @@ variable "node_size" {
   default     = "None"
   validation {
     condition     = contains(["Small", "Medium", "Large", "None", "XLarge", "XXLarge", "XXXLarge"], var.node_size)
-    error_message = format("'node_size' type '%s' is not supported. Possible values are 'Small', 'Medium', 'Large', 'None', 'XLarge', 'XXLarge' and 'XXXLarge'")
+    error_message = format("'node_size' type '%s' is not supported. Possible values are 'Small', 'Medium', 'Large', 'None', 'XLarge', 'XXLarge' and 'XXXLarge'", var.node_size)
   }
 }
 
