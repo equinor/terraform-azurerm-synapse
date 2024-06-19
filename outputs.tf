@@ -13,3 +13,7 @@ output "workspace_resource_group_name" {
 output "workspace_managed_identity" {
   value = azurerm_synapse_workspace.this.identity[0].principal_id
 }
+
+output "workspace_firewall_rules" {
+  value = azurerm_synapse_firewall_rule.this
+}
