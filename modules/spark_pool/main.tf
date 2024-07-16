@@ -129,4 +129,9 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
 
   # NOTE: Metric logs are not currently availaible for export
   # ref: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-metrics/microsoft-synapse-workspaces-bigdatapools-metrics
+  lifecycle {
+    # This is a temporary ignore change as the ds creates an empty
+    # metric that is not usable
+    ignore_changes = [metric]
+  }
 }
