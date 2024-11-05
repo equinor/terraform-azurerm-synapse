@@ -8,24 +8,6 @@ resource "azurerm_synapse_workspace" "this" {
   sql_administrator_login              = var.sql_administrator_login
   sql_administrator_login_password     = var.sql_administrator_login_password
   azuread_authentication_only          = var.azuread_authentication_only
-  dynamic "sql_aad_admin" {
-    for_each = { for sql_aad_admin in var.sql_aad_admins : sql_aad_admin.login => sql_aad_admin }
-
-    content {
-      login     = sql_aad_admin.value.login
-      object_id = sql_aad_admin.value.object_id
-      tenant_id = sql_aad_admin.value.tenant_id
-    }
-  }
-  dynamic "aad_admin" {
-    for_each = { for aad_admin in var.aad_admins : aad_admin.login => aad_admin }
-
-    content {
-      login     = aad_admin.value.login
-      object_id = aad_admin.value.object_id
-      tenant_id = aad_admin.value.tenant_id
-    }
-  }
 
   dynamic "identity" {
     for_each = coalesce([var.identity])
@@ -79,6 +61,26 @@ resource "azurerm_synapse_workspace" "this" {
   lifecycle {
     ignore_changes = [github_repo[0].last_commit_id, azure_devops_repo[0].last_commit_id]
   }
+}
+
+# Add sql Admins
+resource "azurerm_synapse_workspace_sql_aad_admin" "this" {
+  for_each = { for sql_aad_admin in var.sql_aad_admins : sql_aad_admin.login => sql_aad_admin }
+
+  synapse_workspace_id = azurerm_synapse_workspace.this.id
+  login                = each.value.login
+  object_id            = each.value.object_id
+  tenant_id            = each.value.tenant_id
+}
+
+# Add Workspace Admins
+resource "azurerm_synapse_workspace_aad_admin" "this" {
+  for_each = { for aad_admin in var.aad_admins : aad_admin.login => aad_admin }
+
+  synapse_workspace_id = azurerm_synapse_workspace.this.id
+  login                = each.value.login
+  object_id            = each.value.object_id
+  tenant_id            = each.value.tenant_id
 }
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "this" {
