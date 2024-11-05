@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/equinor/terraform-azurerm-synapse/compare/v4.0.0...v5.0.0) (2024-11-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove variable `spark_pools`. To migrate your project, migrate `azurerm_synapse_spark_pool` resources created by this module into the `spark_pool` submodule instead.
+
+### Code Refactoring
+
+* add submodule `spark_pool` ([#25](https://github.com/equinor/terraform-azurerm-synapse/issues/25)) ([c0cf7e5](https://github.com/equinor/terraform-azurerm-synapse/commit/c0cf7e577c77aaf2850f377e7f9bf33aa2a3bb34))
+
 ## [4.0.0](https://github.com/equinor/terraform-azurerm-synapse/compare/v3.0.1...v4.0.0) (2024-04-05)
 
 
