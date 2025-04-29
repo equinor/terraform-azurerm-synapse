@@ -39,7 +39,7 @@ module "synapse" {
 
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
-  location = var.location
+  location = "westeurope"
 }
 
 resource "azurerm_storage_account" "data_lake" {
