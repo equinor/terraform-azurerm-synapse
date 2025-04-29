@@ -9,11 +9,13 @@ Terraform module which creates Azure Synapse resources.
 
 ## Features
 
-TODO(@ErlendT): add list of features.
+- Audit logs sent to given Log Analytics workspace by default.
 
 ## Prerequisites
 
 - Azure role `Contributor` at the resource group scope.
+- Azure role `Storage Account Contributor` at the Data Lake Storage account scope.
+- Azure role `Role Based Access Control Administrator` at the audit Storage account scope.
 - Azure role `Log Analytics Contributor` at the Log Analytics workspace scope.
 
 ## Usage
