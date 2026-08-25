@@ -132,6 +132,6 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
   lifecycle {
     # This is a temporary ignore change as the ds creates an empty
     # metric that is not usable
-    ignore_changes = [metric]
+    ignore_changes = [enabled_metric]
   }
 }

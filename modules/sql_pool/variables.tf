@@ -18,6 +18,17 @@ variable "sku_name" {
   default = "DW200c"
 }
 
+variable "storage_account_type" {
+  description = "The storage account type that will be used to store backups for this Synapse SQL Pool. Possible values are LRS or GRS."
+  type        = string
+  default     = "GRS"
+
+  validation {
+    condition     = contains(["LRS", "GRS"], var.storage_account_type)
+    error_message = format("'storage_account_type' type '%s' is not supported. Possible values are 'LRS' and 'GRS'", var.storage_account_type)
+  }
+}
+
 variable "create_mode" {
   description = "Specifies how to create the sql Pool. Valid values are: Default, Recovery or PointInTimeRestore"
   type        = string
