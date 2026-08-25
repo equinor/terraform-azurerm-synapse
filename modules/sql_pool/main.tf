@@ -2,6 +2,7 @@ resource "azurerm_synapse_sql_pool" "this" {
   name                 = var.name
   synapse_workspace_id = var.workspace_id
   sku_name             = var.sku_name
+  storage_account_type = var.storage_account_type
   create_mode          = var.create_mode
   collation            = var.create_mode == "Default" ? var.collation : null
   data_encrypted       = var.data_encrypted
@@ -27,8 +28,8 @@ data "azurerm_storage_account" "this" {
 }
 
 resource "azurerm_storage_container" "this" {
-  name                 = "${azurerm_synapse_sql_pool.this.name}_VaScans"
-  storage_account_name = data.azurerm_storage_account.this.name
+  name               = "${azurerm_synapse_sql_pool.this.name}_VaScans"
+  storage_account_id = data.azurerm_storage_account.this.id
 }
 
 resource "azurerm_synapse_sql_pool_extended_auditing_policy" "this" {

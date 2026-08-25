@@ -67,10 +67,10 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
       category = enabled_log.value.category
     }
   }
-  dynamic "metric" {
+  dynamic "enabled_metric" {
     for_each = toset(var.diagnostic_setting_metric_categories)
     content {
-      category = metric.value.category
+      category = enabled_metric.value.category
     }
   }
 }
