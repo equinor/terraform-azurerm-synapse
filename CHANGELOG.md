@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.1](https://github.com/equinor/terraform-azurerm-synapse/compare/v5.0.0...v5.0.1) (2026-08-25)
+
+
+### Code Refactoring
+
+* upgrade azurerm to v5 ([#31](https://github.com/equinor/terraform-azurerm-synapse/issues/31)) ([9c416c4](https://github.com/equinor/terraform-azurerm-synapse/commit/9c416c44c065a08469570eda404e15e9f8f62327))
+
 ## [5.0.0](https://github.com/equinor/terraform-azurerm-synapse/compare/v4.0.0...v5.0.0) (2024-11-05)
 
 
